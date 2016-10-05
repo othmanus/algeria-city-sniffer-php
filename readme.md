@@ -1,27 +1,29 @@
-# Laravel PHP Framework
+# Algeria's City Sniffer
+On many projects, when we need the full official list of all wilayas (regions), dairas (departments) and communes (cities) of Algeria, we struggle finding such a basic information.
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This simple project, made by php (Laravel framework), extract, import and convert the data from the [official source](http://www.interieur.gov.dz/index.php/fr/component/annuaire/?view=wilayas) to different file formats (csv, xml, excel, etc.)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
-
-## Official Documentation
+## Installation
+Clone the project on your local machine. And install the components with composer.
+```
+php composer.phar install
+```
 
 Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
-## Contributing
+## Import the data
+Beforehand, make sure to create an empty database, and set the parameters in the .env file.
+Then, execute the following command
+```
+php artisan migrate --seed
+```
+This will create the necessary tables, with all wilayas preloaded.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+To import the data, run the server and click on "Import to your local machine". This will create a Job, to execute it, do the following:
+```
+php artisan queue:work
+```
 
-## Security Vulnerabilities
+## Export
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+I will update the export feature later.

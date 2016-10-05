@@ -16,7 +16,7 @@ class ConverterController extends Controller
      *
      * @return File
      */
-    public function toEmbeddedJson()
+    public function toEmbeddedJson(Request $request)
     {
         // ---------------------------------------------------------------------
         // Embedded version
@@ -40,6 +40,8 @@ class ConverterController extends Controller
         //     ]
         // }
         // ---------------------------------------------------------------------
+        $lang = $request->get('lang');
+
         $output = array();
         $output["wilayas"] = [];
         // get all wilayas
@@ -48,9 +50,22 @@ class ConverterController extends Controller
             $w = [
                 "id" => $wilaya->id,
                 "code" => $wilaya->code,
-                "name" => $wilaya->name,
-                "name_ar" => $wilaya->name_ar,
             ];
+
+            switch($lang) {
+                case "ar":
+                $w["name_ar"] = $wilaya->name_ar;
+                break;
+
+                case "fr":
+                $w["name"] = $wilaya->name;
+                break;
+
+                default:
+                $w["name_ar"] = $wilaya->name_ar;
+                $w["name"] = $wilaya->name;
+                break;
+            }
 
             // get all dairas
             $dairas = $wilaya->dairas;
@@ -58,9 +73,22 @@ class ConverterController extends Controller
                 $d = [
                     "id" => $daira->id,
                     "code" => $daira->code,
-                    "name" => $daira->name,
-                    "name_ar" => $daira->name_ar,
                 ];
+
+                switch($lang) {
+                    case "ar":
+                    $d["name_ar"] = $daira->name_ar;
+                    break;
+
+                    case "fr":
+                    $d["name"] = $daira->name;
+                    break;
+
+                    default:
+                    $d["name_ar"] = $daira->name_ar;
+                    $d["name"] = $daira->name;
+                    break;
+                }
 
                 // get all communes
                 $communes = $daira->communes;
@@ -68,9 +96,22 @@ class ConverterController extends Controller
                     $c = [
                         "id" => $commune->id,
                         "code" => $commune->code,
-                        "name" => $commune->name,
-                        "name_ar" => $commune->name_ar,
                     ];
+
+                    switch($lang) {
+                        case "ar":
+                        $c["name_ar"] = $commune->name_ar;
+                        break;
+
+                        case "fr":
+                        $c["name"] = $commune->name;
+                        break;
+
+                        default:
+                        $c["name_ar"] = $commune->name_ar;
+                        $c["name"] = $commune->name;
+                        break;
+                    }
 
                     $d["communes"][] = $c;
                 }
@@ -84,5 +125,15 @@ class ConverterController extends Controller
         $json = json_encode(json_decode(json_encode($output, JSON_UNESCAPED_UNICODE)), JSON_PRETTY_PRINT);
         Storage::disk('public')->put('communes.json', $json);
         return response()->download(public_path('storage/communes.json'));
+    }
+
+    /**
+     * Convert to csv file
+     *
+     * @return File
+     */
+    public function toCsv(Request $request)
+    {
+        
     }
 }
