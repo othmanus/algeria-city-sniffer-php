@@ -18,31 +18,31 @@
          <div class="card text-xs-center">
             <img class="card-img-top img-fluid" src="/img/json-file.png" alt="Json">
             <div class="card-block">
-               <a href="{{ route('converter.json') }}" class="btn btn-primary">Download</a>
+               <a href="{{ route('converter.embedded_json') }}" class="btn btn-primary">Download</a>
             </div>
          </div>
          <div class="card text-xs-center">
             <img class="card-img-top img-fluid" src="/img/csv.png" alt="CSV">
             <div class="card-block">
-               <a href="{{ route('converter.json') }}" class="btn btn-primary">Download</a>
+               <a href="#" class="btn btn-primary">Download</a>
             </div>
          </div>
          <div class="card text-xs-center">
             <img class="card-img-top img-fluid" src="/img/xml.png" alt="XML">
             <div class="card-block">
-               <a href="{{ route('converter.json') }}" class="btn btn-primary">Download</a>
+               <a href="#" class="btn btn-primary">Download</a>
             </div>
          </div>
          <div class="card text-xs-center">
             <img class="card-img-top img-fluid" src="/img/xls.png" alt="XLS">
             <div class="card-block">
-               <a href="{{ route('converter.json') }}" class="btn btn-primary">Download</a>
+               <a href="#" class="btn btn-primary">Download</a>
             </div>
          </div>
          <div class="card text-xs-center">
             <img class="card-img-top img-fluid" src="/img/pdf.png" alt="PDF">
             <div class="card-block">
-               <a href="{{ route('converter.json') }}" class="btn btn-primary">Download</a>
+               <a href="#" class="btn btn-primary">Download</a>
             </div>
          </div>
       </div>
