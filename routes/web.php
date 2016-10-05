@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('/test', function() {
+    return "wohooo, the test is working";
+});
+
+Route::get('/import', [
+    'as' => 'import.execute',
+    'uses' => 'ImportController@execute'
+]);
+
+Route::get('/embedded_json', [
+    'as' => 'converter.embedded_json',
+    'uses' => 'ConverterController@toEmbeddedJson'
+]);
