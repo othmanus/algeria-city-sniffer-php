@@ -24,19 +24,19 @@
          <div class="card text-xs-center">
             <img class="card-img-top img-fluid" src="/img/csv.png" alt="CSV">
             <div class="card-block">
-               <a href="#" class="btn btn-primary">Download</a>
+               <a href="{{ route('converter.embedded_csv') }}" class="btn btn-primary">Download</a>
             </div>
          </div>
          <div class="card text-xs-center">
             <img class="card-img-top img-fluid" src="/img/xml.png" alt="XML">
             <div class="card-block">
-               <a href="#" class="btn btn-primary">Download</a>
+               <a href="{{ route('converter.embedded_xml') }}" class="btn btn-primary">Download</a>
             </div>
          </div>
          <div class="card text-xs-center">
             <img class="card-img-top img-fluid" src="/img/xls.png" alt="XLS">
             <div class="card-block">
-               <a href="#" class="btn btn-primary">Download</a>
+               <a href="{{ route('converter.embedded_excel') }}" class="btn btn-primary">Download</a>
             </div>
          </div>
          <div class="card text-xs-center">
