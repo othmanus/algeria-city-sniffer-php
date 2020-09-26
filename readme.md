@@ -11,18 +11,21 @@ php composer.phar install
 
 Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
-## Import the data
-Beforehand, make sure to create an empty database, and set the parameters in the .env file.
-Then, execute the following command
+## Setup
+First, make sure to create an empty database, and set the parameters in the `.env` file.
+
+Then, execute the following command to run the migrations:
 ```
 php artisan migrate --seed
 ```
 This will create the necessary tables, with all wilayas preloaded.
 
-To import the data, run the server and click on "Import to your local machine". This will create a Job, to execute it, do the following:
-```
-php artisan queue:work
-```
+## Import the data
+
+1. run the server `php artisan serve`
+2. browse to `http://localhost:8000`
+3. click on `Import to your local machine`. This will create a Job, 
+4. to execute the job: `php artisan queue:work`
 
 ## Export
 

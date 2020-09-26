@@ -45,9 +45,9 @@ class ImportCommunesJob implements ShouldQueue
     public function __construct()
     {
         // links in french
-        $this->url_communes = "http://www.interieur.gov.dz/data/comune2.php?_=".time()."&d=";
+        $this->url_communes = "https://www.interieur.gov.dz/data/comune2.php?_=".time()."&d=";
         // links in arabic
-        $this->url_communes_ar = "http://www.interieur.gov.dz/data/comune2_ar.php?_=".time()."&d=";
+        $this->url_communes_ar = "https://www.interieur.gov.dz/data/comune2_ar.php?_=".time()."&d=";
 
         $this->communes = array();
     }

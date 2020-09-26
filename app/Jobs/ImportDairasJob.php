@@ -44,9 +44,9 @@ class ImportDairasJob implements ShouldQueue
     public function __construct()
     {
         // links in french
-        $this->url_dairas = "http://www.interieur.gov.dz/data/comune.php?_=".time()."&w=";
+        $this->url_dairas = "https://www.interieur.gov.dz/data/comune.php?_=".time()."&w=";
         // links in arabic
-        $this->url_dairas_ar = "http://www.interieur.gov.dz/data/comune_ar.php?_=".time()."&w=";
+        $this->url_dairas_ar = "https://www.interieur.gov.dz/data/comune_ar.php?_=".time()."&w=";
 
         $this->dairas = array();
     }
@@ -120,7 +120,7 @@ class ImportDairasJob implements ShouldQueue
                             ];
                             $dairas[$code] = $daira;
 
-                            // Log::info("Import daira: ".$code." - ".$option->nodeValue);
+                            Log::info("Import daira: ".$code." - ".$option->nodeValue);
                         } else {
                             $daira[$code]['name'] = title_case($option->nodeValue);
                         }
@@ -132,6 +132,7 @@ class ImportDairasJob implements ShouldQueue
             'rejected' => function ($reason, $index) {
                 // this is delivered each failed request
                 // DO NOTHING!
+                Log::error('Failed to import dairas: '.$reason);
             },
         ]);
 
@@ -165,7 +166,7 @@ class ImportDairasJob implements ShouldQueue
                         } else {
                             $dairas[$code]['name_ar'] = $option->nodeValue;
 
-                            // Log::info("Import daira (ar): ".$code." - ".$option->nodeValue);
+                            Log::info("Import daira (ar): ".$code." - ".$option->nodeValue);
                         }
                     }
                 }
@@ -174,6 +175,7 @@ class ImportDairasJob implements ShouldQueue
             'rejected' => function ($reason, $index) {
                 // this is delivered each failed request
                 // DO NOTHING!
+                Log::error('Failed to import dairas (ar): '.$reason);
             },
         ]);
 
