@@ -109,6 +109,16 @@ class ConverterController extends Controller
         return response()->download(public_path('communes.xml'));
     }
 
+    public function toEmbeddedPhp(Request $request)
+    {
+        // get embedded array
+        $output = $this->toEmbeddedArray();
+
+        // Create the file
+        File::put(public_path('communes.php'), $this->outArray($output));
+        return response()->download(public_path('communes.php'));
+    }
+
     /**
      * Make an embedded array of communes within dairas within wilayas
      *
@@ -211,13 +221,13 @@ class ConverterController extends Controller
                         break;
                     }
 
-                    $d["communes"][] = $c;
+                    $d["communes"][$commune->code] = $c;
                 }
 
-                $w["dairas"][] = $d;
+                $w["dairas"][$daira->code] = $d;
             }
 
-            $output["wilayas"][] = $w;
+            $output["wilayas"][$wilaya->code] = $w;
         }
 
         return $output;
@@ -278,5 +288,62 @@ class ConverterController extends Controller
         }
 
         return $output;
+    }
+
+    public function outArray($array, $lvl=0){
+        $sub = $lvl+1;
+        $return = "";
+        if($lvl==null){
+            $return = "<?php\n\treturn array(\n";
+        }
+        foreach($array as $key => $mixed){
+            $key = trim($key);
+            if(!is_array($mixed)){
+                $mixed = "'".addslashes(trim($mixed))."'";
+            }
+            if(empty($key) && empty($mixed)){continue;}
+            $key = "'".addslashes($key)."'";
+
+            if($mixed === null){
+                $mixed = 'null';
+            } elseif($mixed === false){
+                $mixed = 'false';
+            } elseif($mixed === true){
+                $mixed = 'true';
+            } elseif($mixed === ""){
+                $mixed = "''";
+            }
+
+            //CONVERT STRINGS 'true', 'false' and 'null' TO true, false and null
+            //uncomment if needed
+            //elseif(!is_numeric($mixed) && !is_array($mixed) && !empty($mixed)){
+            //  if($mixed != 'false' && $mixed != 'true' && $mixed != 'null'){
+            //    $mixed = "'".addslashes($mixed)."'";
+            //  }
+            //}
+
+
+            if(is_array($mixed)){
+                if($key !== null){
+                    $return .= "\t".str_repeat("\t", $sub)."$key => array(\n";
+                    $return .= $this->outArray($mixed, $sub);
+                    $return .= "\t".str_repeat("\t", $sub)."),\n";
+                } else {
+                    $return .= "\t".str_repeat("\t", $sub)."array(\n";
+                    $return .= $this->outArray($mixed, $sub);
+                    $return .= "\t".str_repeat("\t", $sub)."),\n";
+                }
+            } else {
+                if($key !== null){
+                    $return .= "\t".str_repeat("\t", $sub)."$key => $mixed,\n";
+                } else {
+                    $return .= "\t".str_repeat("\t", $sub).$mixed.",\n";
+                }
+            }
+        }
+        if($lvl==null){
+            $return .= "\t);\n";
+        }
+        return $return;
     }
 }

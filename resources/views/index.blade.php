@@ -40,9 +40,9 @@
             </div>
          </div>
          <div class="card text-xs-center">
-            <img class="card-img-top img-fluid" src="/img/pdf.png" alt="PDF">
+            <img class="card-img-top img-fluid" src="/img/php.png" alt="PDF">
             <div class="card-block">
-               <a href="#" class="btn btn-primary">Download</a>
+               <a href="{{ route('converter.embedded_php') }}" class="btn btn-primary">Download</a>
             </div>
          </div>
       </div>

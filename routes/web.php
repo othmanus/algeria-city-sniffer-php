@@ -41,3 +41,8 @@ Route::get('/embedded_xml', [
     'as' => 'converter.embedded_xml',
     'uses' => 'ConverterController@toEmbeddedXml'
 ]);
+
+Route::get('/embedded_php', [
+    'as' => 'converter.embedded_php',
+    'uses' => 'ConverterController@toEmbeddedPhp'
+]);
